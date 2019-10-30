@@ -4,7 +4,7 @@
  * Contato: filipefirmino@gec.inatel.br
  */
 
-const pg = require('../dao/index');
+const pg = require('../dao/Index');
 const message = require('../controllers/GlobalMessages')
 
 module.exports = {
