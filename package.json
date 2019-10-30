@@ -1,18 +1,21 @@
 {
-  "name": "teste",
-  "version": "0.0.0",
-  "private": true,
-  "scripts": {
-    "start": "node ./bin/www"
-  },
-  "dependencies": {
-    "bovespa": "^0.2.4",
-    "cookie-parser": "~1.4.4",
-    "debug": "~2.6.9",
-    "ejs": "~2.6.1",
-    "express": "~4.16.1",
-    "http-errors": "~1.6.3",
-    "morgan": "~1.9.1",
-    "request": "^2.88.0"
-  }
+    "name": "consulta-cotacoes",
+    "version": "1.0.0",
+    "description": "Server consulta-cotacoes in nodejs",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node index.js"
+    },
+    "author": "Filipe Firmino Lemos",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.17.1",
+        "pg": "^7.12.1",
+        "request": "^2.88.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/firminofl/simula-home-broker-backend.git"
+    }
 }
