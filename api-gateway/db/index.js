@@ -1,4 +1,5 @@
 const { Client } = require('pg')
+const PORT = 3000
 
 const client = new Client({
     user: 'postgres',
@@ -8,17 +9,18 @@ const client = new Client({
     port: 5432,
 })
 
-// client.connect((err) => {
-//     if (err) {
-//         console.log("*******************************");
-//         console.error('* Database connection error *\n\n', err.stack)
-//         console.log("*******************************");
-//     } else {
-//         console.log("**************************************");
-//         console.log("* API-GATEWAY started in port: 3000 * \n* Database: " + client.database + " is connected         *")
-//         console.log("**************************************\n\n");
-//     }
-// })
+client.connect((err) => {
+    if (err) {
+        console.log(`***********************************`);
+        console.error(`* Database connection error *\n\n ${err.stack}`);
+        console.log("*******************************");
+        client.end();
+    } else {
+        console.log(`***********************************`);
+        console.log(`* SHB started on port: ${PORT}       *\n* Database: ${client.database} is connected      *`)
+        console.log(`***********************************\n\n`);
+    }
+})
 
 module.exports = {
     query: (text, values, callback) => {

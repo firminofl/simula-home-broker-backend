@@ -9,24 +9,16 @@ require("dotenv-safe").config()
 let jwt = require('jsonwebtoken');
 const pg = require('./db')
 
-const userServiceProxy = httpProxy('http://localhost:3001');
-const productsServiceProxy = httpProxy('http://localhost:3002');
+const coreProxy = httpProxy('http://localhost:3001');
 
 // Proxy request
-app.get('/users', verifyJWT, (req, res, next) => {
-    console.log(`Cheguei aqui`)
-    res.status(200).send({
-            message: `Deu certo!`
-        })
-        //userServiceProxy(req, res, next);
+app.post('/buscar-cotacoes', verifyJWT, (req, res, next) => {
+    coreProxy(req, res, next);
 })
 
-app.get('/products', verifyJWT, (req, res, next) => {
-    console.log(`Cheguei aqui`)
-    res.status(200).send({
-            message: `Deu certo!`
-        })
-        //productsServiceProxy(req, res, next);
+// Proxy request
+app.get('/buscar-ativos', verifyJWT, (req, res, next) => {
+    coreProxy(req, res, next);
 })
 
 app.use(logger('dev'));
@@ -45,7 +37,7 @@ app.post('/login', (req, res, next) => {
         //auth ok
         const id = 1; //esse id viria do banco de dados
         let token = jwt.sign({ id }, process.env.SECRET, {
-            expiresIn: 60 // expires in 5min
+            expiresIn: 300 // expires in 5min
         });
         res.status(200).send({ auth: true, token: token });
     } else {
