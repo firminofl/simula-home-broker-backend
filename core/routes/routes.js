@@ -7,10 +7,12 @@
 const express = require('express');
 const routes = express.Router();
 
-const Controller = require('../controllers/Controller.js');
+const Controller = require('../controllers/HomeBroker.js');
 
 routes.post('/buscar-cotacoes', Controller.buscar_cotacoes);
 
-routes.get('/buscar-ativos', Controller.select_actives);
+routes.get('/buscar-ativos', Controller.buscar_ativos);
+
+routes.post('/comprar-ativo', Controller.comprar_ativos);
 
 module.exports = routes;
