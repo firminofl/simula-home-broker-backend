@@ -112,6 +112,21 @@ module.exports = {
         } catch (error) {
             return { error: true, message: message.ERROR_UPDATE_ACTIVE_CARTEIRA_VARIAVEL };
         }
+    },
+
+    async deletar_ativo_carteira_variavel(active) {
+        let query = ''
+
+        try {
+            query = `DELETE FROM carteira_variavel 
+            WHERE papel = '${active['symbol']}';`
+
+            pg.queryAsync(query)
+            return { error: false, message: message.SUCCESS_ZERO_ACTIVE_CARTEIRA_VARIAVEL };
+
+        } catch (error) {
+            return { error: true, message: message.ERROR_ZERO_ACTIVE_CARTEIRA_VARIAVEL };
+        }
     }
 }
 

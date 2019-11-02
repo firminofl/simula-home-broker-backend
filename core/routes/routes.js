@@ -15,4 +15,6 @@ routes.get('/buscar-ativos', Controller.buscar_ativos);
 
 routes.post('/comprar-ativo', Controller.comprar_ativos);
 
+routes.post('/vender-ativo', Controller.vender_ativos);
+
 module.exports = routes;

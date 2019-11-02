@@ -17,7 +17,9 @@ const Message = {
     SUCCESS_SAVE_ACTIVE_CARTEIRA_VARIAVEL: 'Ordem de compra efetuada com sucesso!',
     ERROR_SAVE_ACTIVE_CARTEIRA_VARIAVEL: 'Erro ao efetuar a ordem de compra do ativo!',
     SUCCESS_UPDATE_ACTIVE_CARTEIRA_VARIAVEL: 'Sucesso ao atualizar as informações do ativo na renda variável.',
-    ERROR_UPDATE_ACTIVE_CARTEIRA_VARIAVEL: 'Erro ao atualizar as informações do ativo na renda variável.'
+    ERROR_UPDATE_ACTIVE_CARTEIRA_VARIAVEL: 'Erro ao atualizar as informações do ativo na renda variável.',
+    SUCCESS_ZERO_ACTIVE_CARTEIRA_VARIAVEL: 'Sucesso ao vender o ativo. Posição zerada neste ativo.',
+    ERROR_ZERO_ACTIVE_CARTEIRA_VARIAVEL: 'Erro ao vender o ativo. Não foi possível zerar sua posição nele.'
 
 }
 

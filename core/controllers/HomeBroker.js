@@ -82,5 +82,49 @@ module.exports = {
                 });
             }
         });
+    },
+
+    async vender_ativos(req, res) {
+        let { symbol, price, quantity, eletronic_signature, cpf } = req.body;
+
+        let preco_medio = 0,
+            preco_vendido = parseFloat(price) * parseInt(quantity),
+            total_investido = 0;
+
+        ControllerService.buscar_ativo_carteira_variavel(symbol).then(result => {
+            //0 -> Não tem salvo na carteira ainda; 1 -> Tem salvo na carteira então deverá só atualizar suas informações
+            if (result.rows[0].count == "0")
+                res.send({ message: 'Você não tem esse ativo para vendê-lo.' })
+            else {
+                //Buscando informações do ativo para que possa atualizar elas
+                ControllerService.buscar_dados_ativo_carteira_variavel({ symbol }).then(result => {
+                    let capital = 0,
+                        quantidadeTotal = parseInt(result.rows.quantidade) - parseInt(quantity);
+
+                    if (result.rows.quantidade >= quantity) { //Pode vender o ativo
+
+
+                        if (quantidadeTotal == 0) { //Deleta o ativo da carteira
+                            //Atualizando informações do ativo na carteira de renda variavel
+                            ControllerService.deletar_ativo_carteira_variavel({ symbol }).then(result => {
+                                res.send(result.message)
+                            });
+                        } else {
+                            capital = parseFloat(result.rows.total_investido) - parseFloat(preco_vendido);
+
+                            quantity = quantidadeTotal;
+                            preco_medio = capital / quantidadeTotal
+                            total_investido = capital
+
+                            //Atualizando informações do ativo na carteira de renda variavel
+                            ControllerService.atualizar_dados_ativo_carteira_variavel({ symbol, quantity, preco_medio, total_investido }).then(result => {
+                                res.send(result.message)
+                            });
+                        }
+                    } else
+                        res.send({ message: 'Você está tentando vender uma quantidade que não possui.' })
+                });
+            }
+        });
     }
 }
